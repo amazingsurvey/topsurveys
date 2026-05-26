@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consumer Voice | Share Your Opinion, Shape Products</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* RESET & BASE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background: #f9fafb;
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* HEADER - MÀU CAM */
+        .site-header {
+            background: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            color: #ed8936;
+            font-size: 1.8rem;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            letter-spacing: -0.5px;
+        }
+        
+        .logo-tagline {
+            font-size: 0.85rem;
+            color: #718096;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            color: #4a5568;
+            font-weight: 500;
+            padding: 8px 0;
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ed8936;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #ed8936;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #4a5568;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* HERO - MÀU CAM */
+        .hero {
+            background: linear-gradient(135deg, #fffaf0 0%, #feebc8 100%);
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: rgba(237, 137, 54, 0.1);
+            border-radius: 50%;
+            transform: translate(30%, -30%);
+        }
+        
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #4a5568;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .hero-cta {
+            display: inline-block;
+            background: #ed8936;
+            color: white;
+            padding: 14px 36px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(237, 137, 54, 0.3);
+        }
+        
+        .hero-cta:hover {
+            background: #dd6b20;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(237, 137, 54, 0.4);
+        }
+        
+        /* MAIN CONTENT - MÀU CAM */
+        .content-section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #2d3748;
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            background: #fffaf0;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: #ed8936;
+            font-size: 2rem;
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        /* ARTICLE SECTION */
+        .article-section {
+            background: white;
+            border-radius: 16px;
+            padding: 3.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            margin: 3rem 0;
+        }
+        
+        .article-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .article-title {
+            font-size: 2.2rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            color: #718096;
+            font-size: 0.9rem;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .article-image {
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 2.5rem 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .article-content h2 {
+            font-size: 1.6rem;
+            color: #2d3748;
+            margin: 2.5rem 0 1.2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #edf2f7;
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+        
+        .article-content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.8rem;
+            color: #4a5568;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.8rem;
+            position: relative;
+        }
+        
+        .article-content li:before {
+            content: '✓';
+            color: #ed8936;
+            font-weight: bold;
+            position: absolute;
+            left: -1.5rem;
+        }
+        
+        /* CTA BOX - MÀU CAM */
+        .cta-box {
+            background: linear-gradient(135deg, #fffaf0 0%, #feebc8 100%);
+            border: 2px solid #fbd38d;
+            border-radius: 16px;
+            padding: 3rem;
+            text-align: center;
+            margin: 3.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-box:before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(237, 137, 54, 0.1);
+            border-radius: 50%;
+        }
+        
+        .cta-title {
+            font-size: 1.8rem;
+            color: #c05621;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-text {
+            color: #9c4221;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #ed8936;
+            color: white;
+            padding: 16px 42px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 6px 20px rgba(237, 137, 54, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-button:hover {
+            background: #dd6b20;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(237, 137, 54, 0.4);
+        }
+        
+        /* TESTIMONIALS - MÀU CAM */
+        .testimonial-section {
+            background: #fffaf0;
+            padding: 4rem;
+            border-radius: 16px;
+            margin: 3rem 0;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #ed8936;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .author-info h4 {
+            color: #2d3748;
+            font-weight: 600;
+        }
+        
+        .author-info p {
+            color: #718096;
+            font-size: 0.9rem;
+        }
+        
+        /* FOOTER - MÀU CAM ĐẬM */
+        .site-footer {
+            background: #744210;
+            color: #cbd5e0;
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-title {
+            color: #fbd38d;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a:hover {
+            color: #feebc8;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #9c4221;
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+        
+        /* RESPONSIVE - GIỮ NGUYÊN */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 1.5rem;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero {
+                padding: 3.5rem 0;
+            }
+            
+            .article-section {
+                padding: 2rem;
+            }
+            
+            .article-title {
+                font-size: 1.8rem;
+            }
+            
+            .cta-box {
+                padding: 2rem;
+            }
+            
+            .testimonial-section {
+                padding: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .article-title {
+                font-size: 1.5rem;
+            }
+            
+            .cta-title {
+                font-size: 1.5rem;
+            }
+            
+            .cta-button, .hero-cta {
+                padding: 12px 28px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div>
+                        <div class="logo-text">Consumer Voice</div>
+                        <div class="logo-tagline">Your Opinion Shapes Tomorrow</div>
+                    </div>
+                </div>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <nav class="nav-menu" id="navMenu">
+                    <a href="#" class="nav-link">Home</a>
+                    <a href="#" class="nav-link">How It Works</a>
+                    <a href="#" class="nav-link">Topics</a>
+                    <a href="#" class="nav-link">Community</a>
+                    <a href="#" class="nav-link">About</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="container">
+        <h1 class="hero-title">Your Opinion Matters to Brands Worldwide</h1>
+        <p class="hero-subtitle">Join thousands of consumers who share their experiences and preferences to help companies create better products and services.</p>
+        
+  <a href="#" 
+   onclick="openHeroOffer()" 
+   class="hero-cta">
+   Sharing Your Views
+</a>
+
+<script>
+function openHeroOffer() {
+    // Tạo CLICK_ID random
+    const clickId = 'hero_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    // URL với CLICK_ID mới
+    const offerUrl = `https://1buv.com/link?z=11050496&var=amazingsurvey_github_io-thaisurvey&ymid=${encodeURIComponent(clickId)}`;
+    
+    // Chuyển trang trong cùng tab
+    window.location.href = offerUrl;
+    return false;
+}
+</script>
+    </div>
+</section>
+
+    <!-- FEATURES -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Why Share Your Consumer Insights?</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3 class="feature-title">Make Your Voice Heard</h3>
+                    <p>Directly influence product development, advertising campaigns, and service improvements from major brands.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="feature-title">Discover New Products</h3>
+                    <p>Get early access to product concepts and provide feedback before they hit the market.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="feature-title">Join a Community</h3>
+                    <p>Connect with like-minded consumers and discuss market trends, shopping experiences, and brand preferences.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN ARTICLE -->
+    <section class="content-section">
+        <div class="container">
+            <div class="article-section">
+                <div class="article-header">
+                    <h1 class="article-title">How Consumer Feedback is Shaping Today's Marketplace</h1>
+                    <div class="article-meta">
+                        <div class="meta-item">
+                            <i class="far fa-calendar"></i> March 28, 2024
+                        </div>
+                        <div class="meta-item">
+                            <i class="far fa-clock"></i> 6 min read
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-tag"></i> Market Research
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                         alt="Group discussion about consumer products">
+                </div>
+                
+                <div class="article-content">
+                    <p>In today's competitive market, companies are increasingly turning to direct consumer feedback to guide their decisions. From product design to marketing strategies, your everyday opinions are becoming valuable data points that shape the products and services you use.</p>
+                    
+                    <h2>The Evolution of Market Research</h2>
+                    <p>Gone are the days when companies would develop products based solely on internal assumptions. Modern businesses recognize that understanding actual consumer behavior and preferences is key to success. This shift has created numerous opportunities for everyday people to participate in shaping the marketplace.</p>
+                    
+                    <p>Market research has evolved from traditional focus groups to diverse digital platforms that allow for broader, more diverse participation. This democratization of consumer feedback means your voice can be heard regardless of your location or background.</p>
+                    
+                    <h2>How Your Participation Makes a Difference</h2>
+                    <p>When you share your opinions through legitimate consumer insight platforms, you contribute to:</p>
+                    
+                    <ul>
+                        <li><strong>Better Product Design:</strong> Your feedback on usability, features, and aesthetics helps companies create products that truly meet consumer needs.</li>
+                        <li><strong>Improved Customer Experience:</strong> Your insights about shopping journeys and service interactions help businesses streamline their processes.</li>
+                        <li><strong>More Relevant Advertising:</strong> Your media consumption habits and brand perceptions help create advertising that resonates rather than interrupts.</li>
+                        <li><strong>Sustainable Business Practices:</strong> Your values and concerns about environmental and social issues influence corporate responsibility initiatives.</li>
+                    </ul>
+                    
+                    <!-- CTA BOX - VỊ TRÍ CHÍNH CHÈN LINK  -->
+                    <div class="cta-box" id="participate">
+                        <h2 class="cta-title">Ready to Share Your Perspective?</h2>
+                        <p class="cta-text">
+                            We've partnered with trusted consumer insight platforms that connect everyday people with market research opportunities. 
+                            These platforms match your demographics and interests with relevant studies from brands seeking authentic feedback.
+                        </p>
+                        <!-- THAY THẾ LINK Ở ĐÂY -->
+                        <a href="https://onykp.com/link?z=10481650&var=worker1987_github_io_consumer-feedback" 
+                           class="cta-button"
+                          
+                            <i class="fas fa-pencil-alt"></i> Join Consumer Research Panel
+                        </a>
+                        <p style="margin-top: 1rem; color: #4a5568; font-size: 0.9rem;">
+                            <i class="fas fa-shield-alt"></i> Your privacy is protected - all platforms follow strict data protection guidelines
+                        </p>
+                    </div>
+                    
+                    <h2>Getting Started with Consumer Research</h2>
+                    <p>Participating in market research is straightforward. After joining a reputable platform, you'll complete a profile detailing your demographics, interests, and consumption habits. This information helps match you with relevant research opportunities.</p>
+                    
+                    <p>Opportunities may include short surveys, product testing, focus group discussions, or diary studies. Participation is always voluntary, and you can choose which studies align with your interests and availability.</p>
+                    
+                    <p>The most successful participants are those who provide honest, thoughtful feedback. Remember that there are no right or wrong answers in market research—your authentic opinions are what brands truly need to hear.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="content-section">
+        <div class="container">
+            <div class="testimonial-section">
+                <h2 class="section-title">What Participants Are Saying</h2>
+                
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"I've been sharing my opinions about household products for two years now. It feels good knowing my feedback actually influences what ends up on store shelves."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">SR</div>
+                            <div class="author-info">
+                                <h4>Sarah R.</h4>
+                                <p>Consumer Participant since 2022</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"As a tech enthusiast, I love getting to test new app concepts before they're released. My suggestions have been implemented in several products I use daily."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">MJ</div>
+                            <div class="author-info">
+                                <h4>Michael J.</h4>
+                                <p>Technology Feedback Contributor</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"The platform matched me with studies about sustainable packaging—a topic I'm passionate about. It's rewarding to contribute to environmental solutions through my consumer choices."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">LP</div>
+                            <div class="author-info">
+                                <h4>Lisa P.</h4>
+                                <p>Eco-Conscious Consumer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3 class="footer-title">Consumer Voice</h3>
+                    <p>Connecting everyday consumers with brands that value their opinions. Together, we're building better products and services for everyone.</p>
+                </div>
+                
+                <div>
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">How It Works</a></li>
+                        <li><a href="#">Research Topics</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="footer-title">Contact</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> hello@consumervoice.org</li>
+                        <li><i class="fas fa-shield-alt"></i> Privacy Protected</li>
+                        <li><i class="fas fa-user-check"></i> Verified Platforms Only</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2024 Consumer Voice. All content is for informational purposes. We connect consumers with reputable market research opportunities.</p>
+            </div>
+        </div>
+    </footer>
+
+  
+</body>
+
+</html>
